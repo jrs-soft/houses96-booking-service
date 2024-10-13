@@ -1,17 +1,14 @@
-package com.houses96.property.entity;
+package com.houses96.property.dto;
 
-import com.google.cloud.firestore.annotation.DocumentId;
-import com.google.cloud.firestore.annotation.ServerTimestamp;
 import lombok.Getter;
 import lombok.Setter;
-
 import java.util.Date;
 import java.util.List;
 
 @Getter
 @Setter
-public class Property {
-    @DocumentId
+public class PropertyDTO {
+
     private String id;
 
     private String hostId;
@@ -54,10 +51,8 @@ public class Property {
 
     private int firstBookingType;
 
-    @ServerTimestamp
     private Date createdAt;
 
-    @ServerTimestamp
     private Date modifiedAt;
 
     private String status;
