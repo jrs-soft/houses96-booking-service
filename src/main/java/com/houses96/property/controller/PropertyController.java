@@ -28,8 +28,7 @@ public class PropertyController {
     public ResponseEntity<String> insertProperty(@RequestPart("property") PropertyDTO propertyDTO,
                                                  @RequestPart("images") List<MultipartFile> images) {
         try {
-            // Assuming propertyDTO already handles the images or needs processing here
-            propertyService.insertProperty(propertyDTO);
+            propertyService.insertProperty(propertyDTO, images);
             return ResponseEntity.status(HttpStatus.CREATED).body("Property inserted successfully.");
         } catch (Exception e) {
             logger.error("Error occurred when inserting property.", e);
@@ -41,8 +40,7 @@ public class PropertyController {
     public ResponseEntity<String> updateProperty(@RequestPart("property") PropertyDTO propertyDTO,
                                                  @RequestPart("images") List<MultipartFile> images) {
         try {
-            // Assuming propertyDTO already handles the images or needs processing here
-            propertyService.updateProperty(propertyDTO);
+            propertyService.updateProperty(propertyDTO, images);
             return ResponseEntity.status(HttpStatus.OK).body("Property updated successfully.");
         } catch (Exception e) {
             logger.error("Error occurred when updating property.", e);
