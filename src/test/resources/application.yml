@@ -1,0 +1,10 @@
+spring:
+  cloud:
+    gcp:
+      credentials:
+        location: classpath:houses96-service-account.json
+      project-id: houses96
+  security:
+    user:
+      name: admin
+      password: admin
