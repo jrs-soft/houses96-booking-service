@@ -1,10 +1,10 @@
-package com.houses96.module.googlecloudstorage.property.repository;
+package com.houses96.module.property.repository;
 
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.Firestore;
-import com.houses96.module.googlecloudstorage.property.entity.PropertyEntity;
+import com.houses96.module.property.entity.PropertyEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

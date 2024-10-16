@@ -1,7 +1,7 @@
-package com.houses96.module.googlecloudstorage.property.controller;
+package com.houses96.module.property.controller;
 
-import com.houses96.module.googlecloudstorage.property.dto.PropertyDTO;
-import com.houses96.module.googlecloudstorage.property.service.PropertyService;
+import com.houses96.module.property.dto.PropertyDTO;
+import com.houses96.module.property.service.PropertyService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

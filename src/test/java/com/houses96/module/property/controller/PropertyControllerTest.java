@@ -1,8 +1,8 @@
 package com.houses96.module.property.controller;
 
 import com.houses96.application.Application;
-import com.houses96.module.googlecloudstorage.property.dto.PropertyDTO;
-import com.houses96.module.googlecloudstorage.property.service.PropertyService;
+import com.houses96.module.property.dto.PropertyDTO;
+import com.houses96.module.property.service.PropertyService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

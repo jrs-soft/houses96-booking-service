@@ -1,4 +1,4 @@
-package com.houses96.module.googlecloudstorage.property.entity;
+package com.houses96.module.property.entity;
 
 import com.google.cloud.firestore.annotation.DocumentId;
 import com.google.cloud.firestore.annotation.ServerTimestamp;

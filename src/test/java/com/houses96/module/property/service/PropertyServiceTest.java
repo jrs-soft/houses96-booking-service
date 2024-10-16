@@ -1,11 +1,10 @@
-package com.houses96.property.service;
+package com.houses96.module.property.service;
 
-import com.houses96.module.googlecloudstorage.property.service.PropertyService;
 import com.houses96.module.googlecloudstorage.service.GoogleCloudStorageService;
-import com.houses96.module.googlecloudstorage.property.dto.PropertyDTO;
-import com.houses96.module.googlecloudstorage.property.entity.PropertyEntity;
-import com.houses96.module.googlecloudstorage.property.mapper.PropertyMapper;
-import com.houses96.module.googlecloudstorage.property.repository.PropertyRepository;
+import com.houses96.module.property.dto.PropertyDTO;
+import com.houses96.module.property.entity.PropertyEntity;
+import com.houses96.module.property.mapper.PropertyMapper;
+import com.houses96.module.property.repository.PropertyRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

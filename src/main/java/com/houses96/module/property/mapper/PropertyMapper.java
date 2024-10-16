@@ -1,7 +1,7 @@
-package com.houses96.module.googlecloudstorage.property.mapper;
+package com.houses96.module.property.mapper;
 
-import com.houses96.module.googlecloudstorage.property.dto.PropertyDTO;
-import com.houses96.module.googlecloudstorage.property.entity.PropertyEntity;
+import com.houses96.module.property.dto.PropertyDTO;
+import com.houses96.module.property.entity.PropertyEntity;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
