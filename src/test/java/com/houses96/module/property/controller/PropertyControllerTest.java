@@ -1,4 +1,4 @@
-package com.houses96.property.controller;
+package com.houses96.module.property.controller;
 
 import com.houses96.application.Application;
 import com.houses96.module.googlecloudstorage.property.dto.PropertyDTO;

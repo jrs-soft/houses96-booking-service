@@ -1,4 +1,4 @@
-package com.houses96.module.googlecloudstorage.property.dto;
+package com.houses96.module.property.dto;
 
 import lombok.Getter;
 import lombok.Setter;
