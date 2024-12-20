@@ -18,9 +18,9 @@ public class GoogleCloudStorageService {
 
     static {
         try {
-            InputStream serviceAccount = GoogleCloudStorageService.class.getResourceAsStream("/houses96-service-account.json");
+            InputStream serviceAccount = GoogleCloudStorageService.class.getResourceAsStream("/test-houses96-firebase-adminsdk-qlv0i-e53264f362.json");
             if (serviceAccount == null) {
-                throw new IllegalArgumentException("houses96-service-account.json not found in resources folder");
+                throw new IllegalArgumentException("test-houses96-firebase-adminsdk-qlv0i-e53264f362.json not found in resources folder");
             }
             // Load the service account key JSON file
             GoogleCredentials credentials = GoogleCredentials.fromStream(serviceAccount);
