@@ -17,16 +17,16 @@ public class FirebaseConfig {
 
     @Bean
     public FirebaseApp initializeFirebaseApp() throws IOException {
-        InputStream serviceAccount = getClass().getResourceAsStream("/houses96-service-account.json");
+        InputStream serviceAccount = getClass().getResourceAsStream("/test-houses96-firebase-adminsdk-qlv0i-e53264f362.json");
         if (serviceAccount == null) {
-            throw new IllegalArgumentException("houses96-service-account.json not found in resources folder");
+            throw new IllegalArgumentException("test-houses96-firebase-adminsdk-qlv0i-e53264f362.json not found in resources folder");
         }
 
         FirebaseOptions options = new FirebaseOptions.Builder()
                 .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-                .setDatabaseUrl("https://houses96-default-rtdb.firebaseio.com/")
+                .setDatabaseUrl("https://test-houses96-default-rtdb.firebaseio.com/")
                 .build();
-
+//
         FirebaseApp app = FirebaseApp.initializeApp(options);
         testConnectivity();
         return app;

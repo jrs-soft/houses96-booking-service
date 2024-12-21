@@ -2,8 +2,8 @@ spring:
   cloud:
     gcp:
       credentials:
-        location: classpath:houses96-service-account.json
-      project-id: houses96
+        location: classpath:test-houses96-firebase-adminsdk-qlv0i-e53264f362.json
+      project-id: test-houses96
   security:
     user:
       name: admin
