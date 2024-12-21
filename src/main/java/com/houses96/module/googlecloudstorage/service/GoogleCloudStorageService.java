@@ -12,7 +12,7 @@ import java.util.Objects;
 @Service
 public class GoogleCloudStorageService {
 
-    private final String bucketName = "houses96-data-storage";
+    private final String bucketName = "test-houses96.firebasestorage.app";
 
     private static Storage storage;
 

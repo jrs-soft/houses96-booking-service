@@ -31,7 +31,7 @@ class GoogleCloudStorageServiceTest {
     @InjectMocks
     private GoogleCloudStorageService googleCloudStorageService;
 
-    private final String bucketName = "houses96-data-storage";
+    private final String bucketName = "test-houses96.firebasestorage.app";
 
     @BeforeEach
     void setUp() {
@@ -49,7 +49,7 @@ class GoogleCloudStorageServiceTest {
         BlobId blobId = BlobId.of(bucketName, "test-file.txt");
         BlobInfo blobInfo = BlobInfo.newBuilder(blobId).setContentType("text/plain").build();
         when(storage.create(blobInfo, "Sample Content".getBytes())).thenReturn(blob);
-        when(blob.getMediaLink()).thenReturn("http://storage.googleapis.com/houses96-data-storage/test-file.txt");
+        when(blob.getMediaLink()).thenReturn("http://storage.googleapis.com/test-houses96.firebasestorage.app/test-file.txt");
 
         // Act
         String mediaLink = googleCloudStorageService.uploadFile(multipartFile);
