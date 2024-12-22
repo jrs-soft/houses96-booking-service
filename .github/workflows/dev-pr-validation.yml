@@ -6,7 +6,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: PR Validation
+name: Build Test Deploy Houses96 Project
 
 on:
   push:
