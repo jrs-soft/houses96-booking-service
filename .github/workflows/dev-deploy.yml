@@ -19,7 +19,7 @@ jobs:
 
     - name: Configure Google Cloud project
       run: |
-        gcloud config set project YOUR_PROJECT_ID
+        gcloud config set project test-houses96
 
     - name: Build and Deploy to Cloud Run
       run: |
