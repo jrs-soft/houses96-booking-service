@@ -20,7 +20,7 @@ jobs:
     - name: Configure Google Cloud project
       run: |
         gcloud config set project test-houses96
-        gcloud config set account google-cloud-test-houses96@test-houses96.iam.gserviceaccount.com
+        gcloud config set account google-cloud-test-houses96-347@test-houses96.iam.gserviceaccount.com
 
 
     - name: Build and Deploy to Cloud Run
