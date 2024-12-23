@@ -37,7 +37,8 @@ jobs:
 
       # Authenticate Docker with GCP
       - name: Authenticate Docker with GCP
-        run: gcloud auth configure-docker
+        run: |
+          gcloud auth configure-docker --quiet
 
       # Build the Docker image
       - name: Build Docker image
@@ -49,7 +50,7 @@ jobs:
         run: |
           docker push gcr.io/test-houses96/houses96-booking-service:latest
 
-      # Deploy to App Engine...
+      # Deploy to App Engine
       - name: Deploy to App Engine
         run: |
           gcloud app deploy --image-url=gcr.io/test-houses96/houses96-booking-service:latest --quiet
