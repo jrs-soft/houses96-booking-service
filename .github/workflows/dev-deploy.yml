@@ -1,4 +1,4 @@
-name: Deploy to Google Cloud Compute Engine
+name: Deploy to Google Cloud App Engine
 
 on:
   push:
@@ -34,28 +34,17 @@ jobs:
       - name: Configure Google Cloud project
         run: gcloud config set project test-houses96
 
-      # Step 6: Set up the Google Compute Engine VM
-      - name: Create VM instance if it doesn't exist
+      # Step 6: Deploy to Google App Engine
+      - name: Deploy to Google App Engine
         run: |
-          # Check if the VM instance exists
-          INSTANCE_EXISTS=$(gcloud compute instances list --filter="name=test-houses96" --format="value(name)")
+          # Deploy the app to Google Cloud App Engine
+          gcloud app deploy app.yaml --quiet
 
-          # If the VM doesn't exist, create it
-          if [ -z "$INSTANCE_EXISTS" ]; then
-            gcloud compute instances create test-houses96 \
-              --zone=us-central1-a \
-              --image-family debian-11 \
-              --image-project debian-cloud \
-              --machine-type e2-medium \
-              --tags http-server,https-server
-          fi
-
-      # Step 7: Copy the JAR file to the VM
-      - name: Copy JAR to VM
+      # Optional: Wait for the deployment to finish and get the app URL
+      - name: Get deployed URL
         run: |
-          gcloud compute scp target/*.jar test-houses96:~/ --zone=us-central1-a
-
-      # Step 8: Start the Spring Boot application on the VM
-      - name: Start Spring Boot app on VM
-        run: |
-          gcloud compute ssh test-houses96 --zone=us-central1-a --command="nohup java -jar ~/*.jar > app.log 2>&1 &"
+          # Wait for deployment to finish
+          sleep 10
+          # Fetch the deployed URL
+          DEPLOYED_URL=$(gcloud app browse --no-launch)
+          echo "Deployed application is available at: $DEPLOYED_URL"
