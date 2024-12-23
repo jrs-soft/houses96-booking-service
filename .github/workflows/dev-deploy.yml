@@ -14,7 +14,7 @@ jobs:
       # Checkout the code
       - name: Checkout code
         uses: actions/checkout@v3
-
+      
       # Set up Google Cloud SDK
       - name: Set up Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v1
@@ -22,22 +22,27 @@ jobs:
           version: 'latest'
           service_account_key: ${{ secrets.GCP_CREDENTIALS }}
           project_id: test-houses96
-
+      
+      # Build the Spring Boot JAR
+      - name: Build JAR file
+        run: |
+          mvn clean package -DskipTests
+      
       # Authenticate Docker with GCP
       - name: Authenticate Docker with GCP
         run: gcloud auth configure-docker
-
+      
       # Build the Docker image
       - name: Build Docker image
         run: |
           docker build -t gcr.io/test-houses96/houses96-booking-service:latest .
-
+      
       # Push the Docker image to GCR
       - name: Push Docker image to Google Container Registry
         run: |
           docker push gcr.io/test-houses96/houses96-booking-service:latest
-
+      
       # Deploy to App Engine
       - name: Deploy to App Engine
         run: |
-          gcloud app deploy --image-url=gcr.io/your-gcp-project-id/houses96-booking-service:latest --quiet
+          gcloud app deploy --image-url=gcr.io/test-houses96/houses96-booking-service:latest --quiet
