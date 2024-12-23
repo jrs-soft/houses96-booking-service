@@ -30,14 +30,14 @@ jobs:
           service_account_key: ${{ secrets.GCP_CREDENTIALS }}
           project_id: test-houses96
 
-      # Write GCP credentials to file, debug, and activate service account
-      - name: Write and Activate Service Account
+      # Decode Base64 and write GCP credentials to file
+      - name: Decode Base64 and Activate Service Account
         run: |
-          echo "Writing GCP credentials to key.json..."
-          echo "${{ secrets.GCP_CREDENTIALS }}" > key.json
+          echo "Decoding GCP credentials..."
+          echo "${{ secrets.GCP_CREDENTIALS }}" | base64 --decode > key.json
 
           echo "Debugging key.json format..."
-          cat key.json  # This step will output the contents of the JSON for debugging.
+          cat key.json  # Optional, for debugging
 
           echo "Activating service account..."
           gcloud auth activate-service-account --key-file=key.json
