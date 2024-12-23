@@ -9,7 +9,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -23,28 +22,26 @@ jobs:
       - name: Build with Maven
         run: mvn -B package --file pom.xml
 
-      
       - name: Authenticate with Google Cloud
         uses: google-github-actions/auth@v1
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
 
-     
       - name: Configure Google Cloud project
         run: gcloud config set project test-houses96
 
-    
+      - name: Update Google Cloud SDK components
+        run: gcloud components update --quiet
+
       - name: Deploy to Google App Engine
         run: |
           # Deploy the app to Google Cloud App Engine
           gcloud app deploy app.yaml --quiet
 
-    
       - name: Get deployed URL
         run: |
           # Wait for deployment to finish
           sleep 10
           # Fetch the deployed URL
           DEPLOYED_URL=$(gcloud app browse --no-launch)
-          echo "Deployed application is available at: $DEPLOYED_URL" 
-
+          echo "Deployed application is available at: $DEPLOYED_URL"
