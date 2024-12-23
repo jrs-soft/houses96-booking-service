@@ -30,11 +30,16 @@ jobs:
           service_account_key: ${{ secrets.GCP_CREDENTIALS }}
           project_id: test-houses96
 
-      # Activate Service Account and Validate Authentication
-      - name: Activate Service Account and Validate Authentication
+      # Write GCP credentials to file, debug, and activate service account
+      - name: Write and Activate Service Account
         run: |
-          echo "Activating service account..."
+          echo "Writing GCP credentials to key.json..."
           echo "${{ secrets.GCP_CREDENTIALS }}" > key.json
+
+          echo "Debugging key.json format..."
+          cat key.json  # This step will output the contents of the JSON for debugging.
+
+          echo "Activating service account..."
           gcloud auth activate-service-account --key-file=key.json
           gcloud auth list
           gcloud config set project test-houses96
@@ -60,3 +65,9 @@ jobs:
       - name: Deploy to App Engine
         run: |
           gcloud app deploy --image-url=gcr.io/test-houses96/houses96-booking-service:latest --quiet
+
+      # Cleanup sensitive files
+      - name: Cleanup
+        run: |
+          echo "Cleaning up sensitive files..."
+          rm key.json
