@@ -30,10 +30,12 @@ jobs:
           service_account_key: ${{ secrets.GCP_CREDENTIALS }}
           project_id: test-houses96
 
-      # Validate Authentication
-      - name: Validate Authentication
+      # Activate Service Account and Validate Authentication
+      - name: Activate Service Account and Validate Authentication
         run: |
-          echo "Validating GCP authentication..."
+          echo "Activating service account..."
+          echo "${{ secrets.GCP_CREDENTIALS }}" > key.json
+          gcloud auth activate-service-account --key-file=key.json
           gcloud auth list
           gcloud config set project test-houses96
           gcloud auth configure-docker --quiet
