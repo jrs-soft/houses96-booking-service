@@ -21,10 +21,8 @@ jobs:
           java-version: '17'
 
       # Step 3: Build the JAR file
-     # - name: Build JAR
       - name: Build with Maven
         run: mvn -B package --file pom.xml
-
 
       # Step 4: Authenticate with Google Cloud
       - name: Authenticate with Google Cloud
@@ -36,11 +34,11 @@ jobs:
       - name: Configure Google Cloud project
         run: gcloud config set project test-houses96
 
-      # Step 6: Deploy to Google Cloud Run
+      # Step 6: Deploy to Cloud Run
       - name: Deploy to Cloud Run
         run: |
           gcloud run deploy test-houses96 \
-            --source target/*.jar \ 
             --region us-central1 \
             --platform managed \
-            --allow-unauthenticated
+            --allow-unauthenticated \
+            --source .  
