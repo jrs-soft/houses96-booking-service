@@ -42,13 +42,24 @@ jobs:
           gcloud config set project test-houses96
           echo "Authentication validated."
 
-      # Grant createOnPush permission to the service account
-      - name: Grant createOnPush Permission
+      # Debug and Fix IAM Policy
+      - name: Debug and Fix IAM Policy
         run: |
-          echo "Granting artifactregistry.repositories.createOnPush permission..."
-          gcloud projects add-iam-policy-binding test-houses96 \
-              --member="serviceAccount:${{ secrets.GCP_SERVICE_ACCOUNT_EMAIL }}" \
+          echo "Inspecting IAM policy..."
+          gcloud projects get-iam-policy test-houses96 > iam-policy.json
+
+          echo "Checking for invalid conditions..."
+          if grep -q 'condition' iam-policy.json; then
+            echo "Found conditions. Removing them..."
+            gcloud projects remove-iam-policy-binding test-houses96 \
+              --member="serviceAccount:firebase-adminsdk-qlv0i@test-houses96.iam.gserviceaccount.com" \
               --role="roles/artifactregistry.admin"
+          fi
+
+          echo "Re-adding role without conditions..."
+          gcloud projects add-iam-policy-binding test-houses96 \
+            --member="serviceAccount:firebase-adminsdk-qlv0i@test-houses96.iam.gserviceaccount.com" \
+            --role="roles/artifactregistry.admin"
 
       # Configure Docker authentication
       - name: Configure Docker Authentication
@@ -75,8 +86,8 @@ jobs:
         run: |
           gcloud app deploy --image-url=gcr.io/test-houses96/houses96-booking-service:latest --quiet
 
-      # Cleanup sensitive files...
+      # Cleanup sensitive files
       - name: Cleanup
         run: |
           echo "Cleaning up sensitive files..."
-          rm key.json
+          rm key.json iam-policy.json
