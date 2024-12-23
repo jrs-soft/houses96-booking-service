@@ -47,3 +47,4 @@ jobs:
           # Fetch the deployed URL
           DEPLOYED_URL=$(gcloud app browse --no-launch)
           echo "Deployed application is available at: $DEPLOYED_URL" 
+
