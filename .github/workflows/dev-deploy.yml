@@ -30,7 +30,7 @@ jobs:
           service_account_key: ${{ secrets.GCP_CREDENTIALS }}
           project_id: test-houses96
 
-      # Decode Base64 and write GCP credentials to file
+      # Decode Base64 and Activate Service Account
       - name: Decode Base64 and Activate Service Account
         run: |
           echo "Decoding GCP credentials..."
