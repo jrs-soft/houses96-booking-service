@@ -32,8 +32,8 @@ jobs:
 
       - name: Deploy to Google App Engine
         run: |
-          gcloud app deploy pom.xml
-
+          gcloud app deploy
+          
       - name: Get deployed URL
         run: |
           # Wait for deployment to finish
