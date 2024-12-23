@@ -30,15 +30,19 @@ jobs:
           service_account_key: ${{ secrets.GCP_CREDENTIALS }}
           project_id: test-houses96
 
+      # Validate Authentication
+      - name: Validate Authentication
+        run: |
+          echo "Validating GCP authentication..."
+          gcloud auth list
+          gcloud config set project test-houses96
+          gcloud auth configure-docker --quiet
+          echo "Authentication validated."
+
       # Build the Spring Boot JAR
       - name: Build JAR file
         run: |
           mvn clean package -DskipTests
-
-      # Authenticate Docker with GCP
-      - name: Authenticate Docker with GCP
-        run: |
-          gcloud auth configure-docker --quiet
 
       # Build the Docker image
       - name: Build Docker image
