@@ -1,4 +1,4 @@
-name: Deploy to Google Cloud Run
+name: Deploy to Google Cloud Compute Engine
 
 on:
   push:
@@ -34,11 +34,28 @@ jobs:
       - name: Configure Google Cloud project
         run: gcloud config set project test-houses96
 
-      # Step 6: Deploy to Cloud Run
-      - name: Deploy to Cloud Run
+      # Step 6: Set up the Google Compute Engine VM
+      - name: Create VM instance if it doesn't exist
         run: |
-          gcloud run deploy test-houses96 \
-            --region us-central1 \
-            --platform managed \
-            --allow-unauthenticated \
-            --source .  
+          # Check if the VM instance exists
+          INSTANCE_EXISTS=$(gcloud compute instances list --filter="name=test-houses96" --format="value(name)")
+
+          # If the VM doesn't exist, create it
+          if [ -z "$INSTANCE_EXISTS" ]; then
+            gcloud compute instances create test-houses96 \
+              --zone=us-central1-a \
+              --image-family debian-11 \
+              --image-project debian-cloud \
+              --machine-type e2-medium \
+              --tags http-server,https-server
+          fi
+
+      # Step 7: Copy the JAR file to the VM
+      - name: Copy JAR to VM
+        run: |
+          gcloud compute scp target/*.jar test-houses96:~/ --zone=us-central1-a
+
+      # Step 8: Start the Spring Boot application on the VM
+      - name: Start Spring Boot app on VM
+        run: |
+          gcloud compute ssh test-houses96 --zone=us-central1-a --command="nohup java -jar ~/*.jar > app.log 2>&1 &"
