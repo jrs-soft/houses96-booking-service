@@ -75,7 +75,7 @@ jobs:
         run: |
           gcloud app deploy --image-url=gcr.io/test-houses96/houses96-booking-service:latest --quiet
 
-      # Cleanup sensitive files
+      # Cleanup sensitive files...
       - name: Cleanup
         run: |
           echo "Cleaning up sensitive files..."
