@@ -30,9 +30,6 @@ jobs:
       - name: Configure Google Cloud project
         run: gcloud config set project test-houses96
 
-      - name: Update Google Cloud SDK components
-        run: gcloud components update --quiet
-
       - name: Deploy to Google App Engine
         run: |
           # Deploy the app to Google Cloud App Engine
