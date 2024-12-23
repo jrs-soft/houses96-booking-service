@@ -30,14 +30,6 @@ jobs:
           service_account_key: ${{ secrets.GCP_CREDENTIALS }}
           project_id: test-houses96
 
-      # Grant createOnPush permission to the service account
-      - name: Grant createOnPush Permission
-        run: |
-          echo "Granting artifactregistry.repositories.createOnPush permission..."
-          gcloud projects add-iam-policy-binding test-houses96 \
-              --member="serviceAccount:${{ secrets.GCP_SERVICE_ACCOUNT_EMAIL }}" \
-              --role="roles/artifactregistry.admin"
-
       # Decode Base64 and write GCP credentials to file
       - name: Decode Base64 and Activate Service Account
         run: |
@@ -48,8 +40,20 @@ jobs:
           gcloud auth activate-service-account --key-file=key.json
           gcloud auth list
           gcloud config set project test-houses96
-          gcloud auth configure-docker --quiet
           echo "Authentication validated."
+
+      # Grant createOnPush permission to the service account
+      - name: Grant createOnPush Permission
+        run: |
+          echo "Granting artifactregistry.repositories.createOnPush permission..."
+          gcloud projects add-iam-policy-binding test-houses96 \
+              --member="serviceAccount:${{ secrets.GCP_SERVICE_ACCOUNT_EMAIL }}" \
+              --role="roles/artifactregistry.admin"
+
+      # Configure Docker authentication
+      - name: Configure Docker Authentication
+        run: |
+          gcloud auth configure-docker --quiet
 
       # Build the Spring Boot JAR
       - name: Build JAR file
